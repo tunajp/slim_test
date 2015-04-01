@@ -7,6 +7,15 @@
             "email": "m-inaba@phoenixdesign.jp"
         }
     ],
+    "config": {
+      "vendor-dir": "lib/vendor"
+    },
+    "autoload": {
+        "psr-4": {
+                "PhoenixDesign\\": "lib/PhoenixDesign",
+                "Controller\\": "Controller"
+        }
+    },
     "require": {
         "slim/slim": "dev-master",
         "phpmailer/phpmailer": "dev-master",

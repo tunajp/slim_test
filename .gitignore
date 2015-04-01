@@ -1,4 +1,4 @@
 /nbproject/
 /logs/*.log
-/vendor/
+/lib/vendor/
 composer.lock

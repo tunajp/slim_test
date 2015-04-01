@@ -6,7 +6,8 @@
  * Copyright(C) 2015 DesignStudioPhoenix Corporation. All Rights Reserved.
  */
 
-require "vendor/autoload.php";
+require_once './config.php';
+require "lib/vendor/autoload.php";
 
 $app = new \Slim\Slim(
         array(
@@ -17,12 +18,16 @@ $app = new \Slim\Slim(
 
 $app->get('/', function(){
     echo 'Hello';
+    echo PhoenixDesign\Lib\Util::is_ascii('hoge');
 });
 $app->get('/info', function() {
     phpinfo();
 });
 $app->notFound(function(){
     echo '404 not found';
+});
+$app->get('/myclass', function() use($app){
+    (new \Controller\Page($app))->index();
 });
 $app->get('/longlong/:name', function() use($app) {
     myFunction($app);
