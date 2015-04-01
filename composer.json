@@ -1,0 +1,21 @@
+{
+    "name": "vendor/slim_test",
+    "description": "mailform",
+    "authors": [
+        {
+            "name": "Mitsunori Inaba",
+            "email": "m-inaba@phoenixdesign.jp"
+        }
+    ],
+    "require": {
+        "slim/slim": "dev-master",
+        "phpmailer/phpmailer": "dev-master",
+        "smarty/smarty": "3.*"
+    },
+    "require-dev": {
+        "slim/slim": "dev-master",
+        "phpmailer/phpmailer": "dev-master",
+        "smarty/smarty": "3.*"
+    }
+}
+

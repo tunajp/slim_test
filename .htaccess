@@ -1,0 +1,23 @@
+# 不要なアクセスは防いでおきます
+<Files ~ "^\.(htaccess|htpasswd)$">
+    Order deny,allow
+    Deny from all
+</Files>
+<Files ~ "\.(txt|csv|log|dat)$">
+    Order deny,allow
+    Deny from all
+</Files>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /test_group/slim_test
+
+    RewriteRule ^index\.php$ - [L]
+    # ファイル名が存在していたらルールを適用しない
+    RewriteCond %{REQUEST_FILENAME} !-f
+    # ディレクトリが存在していたらルールを適用しない
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # ページヘのアクセスをindex.phpへ向ける
+    RewriteRule . /test_group/slim_test/index.php [L]
+</IfModule>
+
