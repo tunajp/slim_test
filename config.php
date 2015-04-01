@@ -28,6 +28,8 @@ class Config
     public static $DBENCODING;
     
     public static $INPUT_ENCODING = 'UTF-8';
+
+    public static $slim_config;
 }
 
 class MailConfig
@@ -54,6 +56,16 @@ if ($_SERVER['SERVER_NAME']=='www.hoge.exsample' ){ // 本番環境
     Config::$DBPASSWORD = '';
     Config::$DBNAME	 = 'admmail';
     Config::$DBENCODING = 'UTF-8';
+
+    Config::$slim_config = array(
+        'debug' => false,
+        'templates.path' => './templates',
+        'log.writer' => new \Slim\Logger\DateTimeFileWriter(array(
+             'path' => './logs',
+             'name_format' => 'Y-m-d',
+             'message_format' => '%label% - %date% - %message%'
+             ))
+    );
 } else { // 開発環境
     error_reporting(E_ALL); // 全ての PHP エラーを表示する
     ini_set('scream.enabled', true); // エラー制御演算子 を無効化してすべてのエラーを報告させるようにする
@@ -65,4 +77,14 @@ if ($_SERVER['SERVER_NAME']=='www.hoge.exsample' ){ // 本番環境
     Config::$DBPASSWORD = '';
     Config::$DBNAME	 = 'admmail';
     Config::$DBENCODING = 'UTF-8';
+
+    Config::$slim_config = array(
+        'debug' => true,
+        'templates.path' => './templates',
+        'log.writer' => new \Slim\Logger\DateTimeFileWriter(array(
+             'path' => './logs',
+             'name_format' => 'Y-m-d',
+             'message_format' => '%label% - %date% - %message%'
+             ))
+    );
 }

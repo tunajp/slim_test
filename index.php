@@ -6,19 +6,21 @@
  * Copyright(C) 2015 DesignStudioPhoenix Corporation. All Rights Reserved.
  */
 
-require_once './config.php';
 require "lib/vendor/autoload.php";
+require_once './config.php';
 
-$app = new \Slim\Slim(
-        array(
-                'debug' => true,
-                'templates.path' => './templates'
-        )
-);
+$app = new \Slim\Slim(\Config::$slim_config);
 
-$app->get('/', function(){
+$app->get('/', function() use($app) {
     echo 'Hello';
-    echo PhoenixDesign\Lib\Util::is_ascii('hoge');
+    echo PhoenixDesign\Lib\Util::isAscii('hoge');
+
+    $app->getLog()->debug('log'); // - level 4
+    $app->getLog()->info('log');  // - level 3
+    $app->getLog()->warn('log');  // - level 2
+    $app->getLog()->error('log'); // - level 1
+    $app->getLog()->fatal('log'); // - level 0
+
 });
 $app->get('/info', function() {
     phpinfo();

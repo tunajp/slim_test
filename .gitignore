@@ -1,4 +1,6 @@
 /nbproject/
+/csv/*.csv
 /logs/*.log
 /lib/vendor/
 composer.lock
+/csv/counter.dat

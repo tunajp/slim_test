@@ -15,8 +15,8 @@ $_SERVER['SERVER_NAME'] = 'localhost.localdomain';
 assert_options(ASSERT_ACTIVE, 1);
 assert_options(ASSERT_WARNING, 1);
 
-require_once './config.php';
 require 'lib/vendor/autoload.php';
+require_once './config.php';
 
 use PhoenixDesign\Lib as plib;
 

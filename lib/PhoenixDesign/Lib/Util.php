@@ -146,7 +146,33 @@ class Util
     {
         //@chmod($logfile, 0666);
         $nowDate = date("ymd");
-        $fp = @fopen( $logfile, "r+" ); // ファイル開く
+        // 無ければ作る
+        if (true != file_exists($logfile)) {
+            if (touch($logfile)) {
+            } else {
+                $result="お問合せ番号ファイルを作成できませんでした。";
+                return -1;
+            }
+            //@chmod($logfile, 0666);
+            $fp = fopen( $logfile, "w" ); // ファイル開く
+            if (!$fp) {
+                $result="お問合せ番号ファイルを作成用にオープンできませんでした。";
+                return -1;
+            }
+            // 排他ロックをかける
+            if (!@flock($fp, LOCK_EX)) {
+                $result="お問合せ番号ファイルを作成用にロックできませんでした。";
+                return -1;
+            }
+            $dat = "0<>$nowDate<>"; 
+            rewind( $fp ); // ファイルポインタを先頭に戻す
+            fputs( $fp, $dat ); // 値書き込み
+
+            fflush($fp); // 徳丸ロジック(http://tumblr.tokumaru.org/post/37141017115/php5-3-2-fclose)
+            flock($fp, LOCK_UN);
+            fclose( $fp ); // ファイル閉じる
+        }
+        $fp = fopen( $logfile, "r+" ); // ファイル開く
         if (!$fp) {
             $result="お問合せ番号ファイルをオープンできませんでした。";
             return -1;
@@ -165,6 +191,8 @@ class Util
         $dat = "$count<>$nowDate<>"; 
         rewind( $fp ); // ファイルポインタを先頭に戻す
         fputs( $fp, $dat ); // 値書き込み
+        fflush($fp); // 徳丸ロジック(http://tumblr.tokumaru.org/post/37141017115/php5-3-2-fclose)
+        flock($fp, LOCK_UN);
         fclose( $fp ); // ファイル閉じる
         $num = $nowDate . sprintf('%04d', $count);
         return $num;
