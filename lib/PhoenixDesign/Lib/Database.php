@@ -35,17 +35,13 @@ class Database implements BaseDatabase
      */
     private function __construct()
     {
-        global $DBHOST;
-        global $DBUSER;
-        global $DBPASSWORD;
-        global $DBNAME;
-        global $DBENCODING;
         try {
-            //$dsn = 'mysql:dbname=' . $DBNAME . ';host=' . $DBHOST;
+            //$dsn = 'mysql:dbname=' . Config::$DBNAME . ';host=' . Config::$DBHOST;
             //5.3.6以降
-            $dsn = 'mysql:dbname=' . $DBNAME . ';host=' . $DBHOST . ";charset=utf8;";
-            //self::$cnx = new \PDO($dsn, $DBUSER, $DBPASSWORD, array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET `utf8`", \PDO::ATTR_PERSISTENT => true) );
-            self::$cnx = new \PDO($dsn, $DBUSER, $DBPASSWORD, array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET `utf8`") );
+            $dsn = 'mysql:dbname=' . \Config::$DBNAME . ';host=' . \Config::$DBHOST . ";charset=utf8;";
+            //\PDO::ATTR_PERSISTENT => true
+            self::$cnx = new \PDO($dsn, \Config::$DBUSER, \Config::$DBPASSWORD, array(
+                        \PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET `utf8`") );
             if (self::$cnx == null) {
                 throw new \Exception('mysql::PDO - データベースと接続に失敗しました');
             }
@@ -54,7 +50,7 @@ class Database implements BaseDatabase
             throw new \Exception($excep->getMessage());
         }
 
-        \PhoenixDesign\Lib\Error::error_log('mysql::PDO - データベースと接続が開始されました...');
+        //\PhoenixDesign\Lib\Error::error_log('mysql::PDO - データベースと接続が開始されました...');
         
         try {
             $query = "set names utf8";
@@ -69,7 +65,7 @@ class Database implements BaseDatabase
      */
     public function __destruct()
     {
-        \PhoenixDesign\Lib\Error::error_log('mysql::PDO - データベースと接続を終了します...');
+        //\PhoenixDesign\Lib\Error::error_log('mysql::PDO - データベースと接続を終了します...');
         self::$cnx = null;
     }
     
@@ -118,7 +114,7 @@ class Database implements BaseDatabase
         }
         $max = 0;
         if (count($result_arr) > 0) {
-            foreach ( $result_arr as $user ) {
+            foreach ($result_arr as $user) {
                 $max = $user['count'];
             }
         }

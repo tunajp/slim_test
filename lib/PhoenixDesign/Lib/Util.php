@@ -673,17 +673,10 @@ class Util
                 //$mail->$SMTPDebug = 2;
                 $mail->IsSMTP();
                 $mail->SMTPAuth = true;
-                //
-                // TODO:直す
-                //
-                global $SMTP_MAIL_SERVER_HOST;
-                global $SMTP_MAIL_SERVER_PORT;
-                global $SMTP_MAIL_USERNAME;
-                global $SMTP_MAIL_PASSWORD;
-                $mail->Host = $SMTP_MAIL_SERVER_HOST;
-                $mail->Port = $SMTP_MAIL_SERVER_PORT;
-                $mail->Username = $SMTP_MAIL_USERNAME;
-                $mail->Password = $SMTP_MAIL_PASSWORD;
+                $mail->Host = \Config::$SMTP_MAIL_SERVER_HOST;
+                $mail->Port = \Config::$SMTP_MAIL_SERVER_PORT;
+                $mail->Username = \Config::$SMTP_MAIL_USERNAME;
+                $mail->Password = \Config::$SMTP_MAIL_PASSWORD;
                 //$mail->Host = "smtp.gmail.com";
                 //$mail->Username = "example＠gmail.com";
                 //$mail->Password = "password";
