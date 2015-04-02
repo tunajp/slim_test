@@ -29,7 +29,9 @@ $app->notFound(function(){
     echo '404 not found';
 });
 $app->get('/myclass', function() use($app){
-    (new \Controller\Page($app))->index();
+    //(new \Controller\Page($app))->index();
+    $c = new \Controller\Page($app);
+    $c->index();
 });
 $app->get('/longlong/:name', function() use($app) {
     myFunction($app);
