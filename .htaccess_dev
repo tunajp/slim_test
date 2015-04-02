@@ -1,4 +1,4 @@
-# •s—v‚ÈƒAƒNƒZƒX‚Í–h‚¢‚Å‚¨‚«‚Ü‚·
+# ä¸è¦ãªã‚¢ã‚¯ã‚»ã‚¹ã¯é˜²ã„ã§ãŠãã¾ã™
 <Files ~ "^\.(htaccess|htpasswd)$">
     Order deny,allow
     Deny from all
@@ -13,11 +13,11 @@
     RewriteBase /test_group/slim_test
 
     RewriteRule ^index\.php$ - [L]
-    # ƒtƒ@ƒCƒ‹–¼‚ª‘¶Ý‚µ‚Ä‚¢‚½‚çƒ‹[ƒ‹‚ð“K—p‚µ‚È‚¢
+    # ãƒ•ã‚¡ã‚¤ãƒ«åãŒå­˜åœ¨ã—ã¦ã„ãŸã‚‰ãƒ«ãƒ¼ãƒ«ã‚’é©ç”¨ã—ãªã„
     RewriteCond %{REQUEST_FILENAME} !-f
-    # ƒfƒBƒŒƒNƒgƒŠ‚ª‘¶Ý‚µ‚Ä‚¢‚½‚çƒ‹[ƒ‹‚ð“K—p‚µ‚È‚¢
+    # ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªãŒå­˜åœ¨ã—ã¦ã„ãŸã‚‰ãƒ«ãƒ¼ãƒ«ã‚’é©ç”¨ã—ãªã„
     RewriteCond %{REQUEST_FILENAME} !-d
-    # ƒy[ƒWƒw‚ÌƒAƒNƒZƒX‚ðindex.php‚ÖŒü‚¯‚é
+    # ãƒšãƒ¼ã‚¸ãƒ˜ã®ã‚¢ã‚¯ã‚»ã‚¹ã‚’index.phpã¸å‘ã‘ã‚‹
     RewriteRule . /test_group/slim_test/index.php [L]
 </IfModule>
 
