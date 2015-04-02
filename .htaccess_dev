@@ -8,6 +8,15 @@
     Deny from all
 </Files>
 
+# 末尾に/を付加
+<IfModule mod_rewrite.c>
+RewriteCond %{REQUEST_URI} !/$
+RewriteCond %{REQUEST_URI} !\.[^/\.]+$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* %{REQUEST_URI}/ [R,L]
+</IfModule>
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /test_group/slim_test

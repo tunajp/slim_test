@@ -11,7 +11,15 @@ require_once './config.php';
 
 $app = new \Slim\Slim(\Config::$slim_config);
 
-$app->get('/', function() use($app) {
+$values = array(
+    'page_title' => '',
+    'id' => 'A',
+    'name' => '',
+    'age' => '',
+    'comment' => '',
+);
+
+$app->get('/', function() use($app, $values) {
     echo 'Hello';
     echo PhoenixDesign\Lib\Util::isAscii('hoge');
 
@@ -28,15 +36,15 @@ $app->get('/info', function() {
 $app->notFound(function(){
     echo '404 not found';
 });
-$app->get('/myclass', function() use($app){
+$app->get('/myclass/', function() use($app){
     //(new \Controller\Page($app))->index();
     $c = new \Controller\Page($app);
     $c->index();
 });
-$app->get('/longlong/:name', function() use($app) {
+$app->get('/longlong/:name/', function() use($app) {
     myFunction($app);
 });
-$app->get('/json', function() use($app) {
+$app->get('/json/', function() use($app) {
     $result = array(
         'id' => '100',
         'name' => '名前',
@@ -45,20 +53,20 @@ $app->get('/json', function() use($app) {
     $app->response->headers->set('Content-Type', 'application/json');
     echo json_encode($result);
 });
-$app->get('/hello/:name', function($name){
+$app->get('/hello/:name/', function($name){
     echo 'Hello ' . $name;
 });
-$app->get('/test', function() use ($app) {
-    $values = array(
-        'page_title' => 'ページ',
-        'id' => '100',
-        'name' => '名前',
-    );
+$app->get('/redirect/', function() use($app){
+    $app->redirect(\Config::$app_path . 'test/');
+});
+$app->get('/test/', function() use ($app, $values) {
+    $values['page_title'] = 'ページ';
     $values['id'] = '101';
+    $values['name'] = '名前';
 
     $app->render('test.php', array('values' => $values));
 });
-$app->post('/post_test', function() use($app) {
+$app->post('/post_test/', function() use($app) {
     $name = $app->request()->post('name');
     $age = $app->request()->post('age');
     $sex = '';

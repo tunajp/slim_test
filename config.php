@@ -30,6 +30,7 @@ class Config
     public static $INPUT_ENCODING = 'UTF-8';
 
     public static $slim_config;
+    public static $app_path;
 }
 
 class MailConfig
@@ -66,6 +67,7 @@ if ($_SERVER['SERVER_NAME']=='www.hoge.exsample' ){ // 本番環境
              'message_format' => '%label% - %date% - %message%'
              ))
     );
+    Config::$app_path = "/test_group/slim_test/";
 } else { // 開発環境
     error_reporting(E_ALL); // 全ての PHP エラーを表示する
     ini_set('scream.enabled', true); // エラー制御演算子 を無効化してすべてのエラーを報告させるようにする
@@ -87,4 +89,5 @@ if ($_SERVER['SERVER_NAME']=='www.hoge.exsample' ){ // 本番環境
              'message_format' => '%label% - %date% - %message%'
              ))
     );
+    Config::$app_path = "/test_group/slim_test/";
 }

@@ -1,14 +1,16 @@
 <?php include('common/header.php') ?>
 
+<?php use PhoenixDesign\Lib as plib; ?>
+
 <div>
-<?php echo $values['id'] ?>
+<?php echo plib\Util::h($values['id']) ?>
 </div>
 
 <div>
-<?php echo $values['name'] ?>
+<?php echo plib\Util::h($values['name']) ?>
 </div>
 
-<form action="./post_test" method="post">
+<form action="<?php echo \Config::$app_path ?>post_test/" method="post">
 <input type="text" name="name">
 <input type="text" name="age">
 <input type="radio" name="sex" value="男">
