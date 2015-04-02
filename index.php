@@ -16,6 +16,7 @@ $values = array(
     'id' => 'A',
     'name' => '',
     'age' => '',
+    'sex' => '',
     'comment' => '',
 );
 
@@ -66,13 +67,13 @@ $app->get('/test/', function() use ($app, $values) {
 
     $app->render('test.php', array('values' => $values));
 });
-$app->post('/post_test/', function() use($app) {
-    $name = $app->request()->post('name');
-    $age = $app->request()->post('age');
+$app->post('/post_test/', function() use($app, $values) {
+    $values['name'] = $app->request()->post('name');
+    $values['age'] = $app->request()->post('age');
     $sex = '';
     if (NULL == $app->request()->post('sex')) echo '性別が選択されていません';
-    else $sex = $app->request()->post('sex');
-    echo 'test name->' . $name . ',age->' . $age . ',性別->' . $sex;
+    else $values['sex'] = $app->request()->post('sex');
+    echo 'test name->' . $values['name'] . ',age->' . $values['age'] . ',性別->' . $values['sex'];
 });
 
 $app->run();
