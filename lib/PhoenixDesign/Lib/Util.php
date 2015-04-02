@@ -629,7 +629,7 @@ class Util
      */
     public static function sendmail($to_array, $cc_array, $bcc_array,
             $from, $fromname, $subject, $body , $isSMTP = false,
-            $attach_array = nulll, $attach_type = "binary")
+            $attach_array = null, $attach_type = "binary")
     {
         try {
             mb_language("japanese");
