@@ -4,3 +4,4 @@
 /lib/vendor/
 composer.lock
 /csv/counter.dat
+/templates_c/*.php
