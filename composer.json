@@ -26,7 +26,8 @@
         "slim/slim": "dev-master",
         "slim/logger": "*",
         "phpmailer/phpmailer": "dev-master",
-        "smarty/smarty": "3.*"
+        "smarty/smarty": "3.*",
+        "phpunit/phpunit": "*"
     }
 }
 
