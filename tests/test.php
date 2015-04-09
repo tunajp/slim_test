@@ -3,7 +3,7 @@
  * test.php
  *
  * php composer.phar install --dev
- * php lib/vendor/phpunit/phpunit/phpunit --colors tests/test.php
+ * php lib/vendor/phpunit/phpunit/phpunit
  *
  * @author Mitsunori Inaba <m-inaba@phoenixdesign.jp>
  * Copyright(C) 2015 DesignStudioPhoenix Corporation. All Rights Reserved.
