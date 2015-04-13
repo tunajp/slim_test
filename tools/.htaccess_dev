@@ -1,0 +1,7 @@
+order deny,allow 
+deny from all 
+allow from 210.146.118.19 # PhoenixDesign
+allow from localhost 127.0.0.1 # localhost
+allow from 192.168.1. # ローカルIP
+allow from dell-pc # マシン名
+allow from ::1 # IPv6のローカルIP
