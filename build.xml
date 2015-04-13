@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="slim_test" default="build">
+ <target name="build" depends="phpcs, phpunit"/>
+
+ <target name="phpcs"
+         description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
+   <exec executable="lib/vendor/bin/phpcs">
+   <arg value="--standard=PSR2" />
+   <arg path="${basedir}" />
+  </exec>
+ </target>
+
+ <target name="phpunit" description="Run unit tests with PHPUnit">
+    <exec dir="${basedir}/Test" executable="lib/vendor/bin/phpunit" failonerror="true">
+    <arg line="--colors --log-junit ${basedir}/build/logs/phpunit.xml ./"/>
+  </exec>
+ </target>
+
+</project>
