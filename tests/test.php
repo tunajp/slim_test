@@ -23,7 +23,7 @@ class MyTest extends \PHPUnit_Framework_TestCase
      */
     public function Util()
     {
-        $test_ret = plib\Util::isAscii('abc');
+        $test_ret = plib\Util::isAscii('abcあ');
         $this->assertEquals(true, $test_ret);
 
         $test_ret = plib\Util::isAscii('あいう');
