@@ -8,12 +8,13 @@
    <exec executable="lib/vendor/bin/phpcs">
    <arg value="--standard=PSR2" />
    <arg path="${basedir}" />
-   <arg value="--ignore=libs/vendor" />
-  </exec>
+   <arg value="--exclude"/>
+   <arg value="lib/vendor" />
+   </exec>
  </target>
 
  <target name="phpunit" description="Run unit tests with PHPUnit">
-    <exec dir="${basedir}/tests" executable="lib/vendor/bin/phpunit" failonerror="true">
+    <exec dir="${basedir}" executable="lib/vendor/bin/phpunit" failonerror="true">
     <arg line="--colors --log-junit ${basedir}/build/logs/phpunit.xml ./"/>
   </exec>
  </target>
