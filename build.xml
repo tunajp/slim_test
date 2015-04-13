@@ -14,7 +14,7 @@
 
  <target name="phpunit" description="Run unit tests with PHPUnit">
     <exec executable="lib/vendor/bin/phpunit" failonerror="true">
-    <arg line="--colors --log-junit ${basedir}/build/logs/phpunit.xml ${basedir}"/>
+    <arg line="--colors tests/test.php"/>
   </exec>
  </target>
 
