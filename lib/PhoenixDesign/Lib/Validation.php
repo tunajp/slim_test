@@ -8,7 +8,8 @@
 
 namespace PhoenixDesign\Lib;
 
-abstract class Validation extends \PhoenixDesign\Lib\Api{
+abstract class Validation extends \PhoenixDesign\Lib\Api
+{
     protected function required($input_data, $data)
     {
         if (!isset($input_data[$data]) || 0 == strlen($input_data[$data])) {

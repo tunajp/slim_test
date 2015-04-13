@@ -18,19 +18,19 @@ class Database implements BaseDatabase
 {
     /**
      * PDOオブジェクト
-     * @var PDO 
+     * @var PDO
      */
     private static $cnx;
     
     /**
      * singleton
-     * @var type 
+     * @var type
      */
     private static $instance;
 
     /**
      * コンストラクタ
-     * 
+     *
      * @throws Exception
      */
     private function __construct()
@@ -40,8 +40,14 @@ class Database implements BaseDatabase
             //5.3.6以降
             $dsn = 'mysql:dbname=' . \Config::$DBNAME . ';host=' . \Config::$DBHOST . ";charset=utf8;";
             //\PDO::ATTR_PERSISTENT => true
-            self::$cnx = new \PDO($dsn, \Config::$DBUSER, \Config::$DBPASSWORD, array(
-                        \PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET `utf8`") );
+            self::$cnx = new \PDO(
+                $dsn,
+                \Config::$DBUSER,
+                \Config::$DBPASSWORD,
+                array(
+                    \PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET `utf8`"
+                )
+            );
             if (self::$cnx == null) {
                 throw new \Exception('mysql::PDO - データベースと接続に失敗しました');
             }
@@ -71,7 +77,7 @@ class Database implements BaseDatabase
     
     /**
      * インスタンス取得
-     * 
+     *
      * @return pdo
      */
     public static function getInstance()
@@ -85,17 +91,17 @@ class Database implements BaseDatabase
     
     /**
      * このインスタンスの複製を許可しないようにする
-     * 
+     *
      * @throws RuntimeException
      */
-    public final function __clone()
+    final public function __clone()
     {
         throw new RuntimeException('cloneは生成できません' . get_class($this));
     }
 
     /**
      * 条件を指定せずにテーブルのデータ数を取得します
-     * 
+     *
      * @param type $table_name
      * @return type
      * @throws \Exception

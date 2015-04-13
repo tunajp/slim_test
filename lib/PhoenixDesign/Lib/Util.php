@@ -15,11 +15,11 @@ class Util
      * @param string $str チェックしたい文字列
      * @return boolean trueなら全部ASCII falseならASCII以外が含まれている
      */
-    public static function isAscii( $str )
+    public static function isAscii($str)
     {
-        if ( 0 == strlen( $str ) ) {
+        if (0 == strlen($str)) {
             return true;
-        } else if ( preg_match( "/^[\x01-\x7E]+$/", $str ) ) {
+        } elseif (preg_match("/^[\x01-\x7E]+$/", $str)) {
             return true;
         } else {
             return false;
@@ -31,7 +31,7 @@ class Util
      * @param string $str
      * @return boolean
      */
-    public static function isAllZenkaku( $str )
+    public static function isAllZenkaku($str)
     {
         if (!preg_match("/(?:\xEF\xBD[\xA1-\xBF]|\xEF\xBE[\x80-\x9F])|[\x20-\x7E]/", $str)) {
             return true;
@@ -45,7 +45,7 @@ class Util
      * @param string $str
      * @return boolean
      */
-    public static function isAllHiragana( $str )
+    public static function isAllHiragana($str)
     {
         if (preg_match("/^[ぁ-ん]+$/u", $str)) {
             return true;
@@ -59,7 +59,7 @@ class Util
      * @param string $str
      * @return boolean
      */
-    public static function isAllKatakana( $str )
+    public static function isAllKatakana($str)
     {
         if (preg_match("/^[ァ-ヾ]+$/u", $str)) {
             return true;
@@ -73,9 +73,18 @@ class Util
      * @param string $str チェックしたい文字列
      * @return boolean メールアドレスならtrue
      */
-    public static function isMailAddr( $str )
+    public static function isMailAddr($str)
     {
-        if ( preg_match( '/^(?:(?:(?:(?:[a-zA-Z0-9_!#\$\%&\'*+\/=?\^`{}~|\-]+)(?:\.(?:[a-zA-Z0-9_!#\$\%&\'*+\/=?\^`{}~|\-]+))*)|(?:"(?:\\[^\r\n]|[^\\"])*")))\@(?:(?:(?:(?:[a-zA-Z0-9_!#\$\%&\'*+\/=?\^`{}~|\-]+)(?:\.(?:[a-zA-Z0-9_!#\$\%&\'*+\/=?\^`{}~|\-]+))*)|(?:\[(?:\\\S|[\x21-\x5a\x5e-\x7e])*\])))$/', $str ) ) {
+        if (preg_match(
+            '/^(?:(?:(?:(?:[a-zA-Z0-9_!#\$\%&\'*+\/=?\^`{}~|\-]+)'
+            . '(?:\.(?:[a-zA-Z0-9_!#\$\%&\'*+\/=?\^`{}~|\-]+))*)'
+            . '|(?:"(?:\\[^\r\n]|[^\\"])*")))\@(?:(?:(?:(?:[a-zA'
+            . '-Z0-9_!#\$\%&\'*+\/=?\^`{}~|\-]+)(?:\.(?:[a-zA-Z0'
+            . '-9_!#\$\%&\'*+\/=?\^`{}~|\-]+))*)|(?:\[(?:\\\S|'
+            . '[\x21-\x5a\x5e-\x7e])*\])))$/',
+            $str
+        )
+        ) {
             return true;
         } else {
             return false;
@@ -84,11 +93,11 @@ class Util
     /**
      * ダブルクォーテーション.
      * @param string $string 文字列
-     * @return 
+     * @return string クォートした文字列
      */
-    public static function quat( $string )
+    public static function quat($string)
     {
-        $string = str_replace( array( '"' ), '”', $string );
+        $string = str_replace(array('"'), '”', $string);
         return $string;
     }
 
@@ -97,13 +106,13 @@ class Util
      * @param int $length_required 必要な文字列長。省略すると8文字
      * @return ランダムな文字列
      */
-    public static function getRandomString( $length_required = 8 )
+    public static function getRandomString($length_required = 8)
     {
         $character_list = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_';
         mt_srand();
         $result = '';
         for ($i = 0; $i < $length_required; $i++) {
-            $result .= $character_list[(mt_rand( 0, strlen( $character_list ) - 1 ) )];
+            $result .= $character_list[(mt_rand(0, strlen($character_list) - 1))];
         }
         return $result;
     }
@@ -113,7 +122,7 @@ class Util
      * @param string $str 文字列
      * @return string サニタイズ後の文字列
      */
-    public static function escHtml( $str )
+    public static function escHtml($str)
     {
         if (0 != strlen($str)) {
             return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
@@ -154,7 +163,7 @@ class Util
                 return -1;
             }
             //@chmod($logfile, 0666);
-            $fp = fopen( $logfile, "w" ); // ファイル開く
+            $fp = fopen($logfile, "w"); // ファイル開く
             if (!$fp) {
                 $result="お問合せ番号ファイルを作成用にオープンできませんでした。";
                 return -1;
@@ -164,15 +173,15 @@ class Util
                 $result="お問合せ番号ファイルを作成用にロックできませんでした。";
                 return -1;
             }
-            $dat = "0<>$nowDate<>"; 
-            rewind( $fp ); // ファイルポインタを先頭に戻す
-            fputs( $fp, $dat ); // 値書き込み
+            $dat = "0<>$nowDate<>";
+            rewind($fp); // ファイルポインタを先頭に戻す
+            fputs($fp, $dat); // 値書き込み
 
             fflush($fp); // 徳丸ロジック(http://tumblr.tokumaru.org/post/37141017115/php5-3-2-fclose)
             flock($fp, LOCK_UN);
-            fclose( $fp ); // ファイル閉じる
+            fclose($fp); // ファイル閉じる
         }
-        $fp = fopen( $logfile, "r+" ); // ファイル開く
+        $fp = fopen($logfile, "r+"); // ファイル開く
         if (!$fp) {
             $result="お問合せ番号ファイルをオープンできませんでした。";
             return -1;
@@ -188,12 +197,12 @@ class Util
             $count = 0;
         }
         $count++; // カウントアップ
-        $dat = "$count<>$nowDate<>"; 
-        rewind( $fp ); // ファイルポインタを先頭に戻す
-        fputs( $fp, $dat ); // 値書き込み
+        $dat = "$count<>$nowDate<>";
+        rewind($fp); // ファイルポインタを先頭に戻す
+        fputs($fp, $dat); // 値書き込み
         fflush($fp); // 徳丸ロジック(http://tumblr.tokumaru.org/post/37141017115/php5-3-2-fclose)
         flock($fp, LOCK_UN);
-        fclose( $fp ); // ファイル閉じる
+        fclose($fp); // ファイル閉じる
         $num = $nowDate . sprintf('%04d', $count);
         return $num;
     }
@@ -268,14 +277,14 @@ class Util
             // 土曜日の場合
             $w = $d;
         }
-        return ceil($w/$week_day);                
+        return ceil($w/$week_day);
     }
 
     /**
      * X営業日後を求めます
      * $d = getFourEigyoubigo();
      * echo date('Y-m-d', $d);
-     * 
+     *
      * @return type
      */
     public static function getXEigyoubigo($x_eigyoubi)
@@ -535,8 +544,8 @@ class Util
         $now = time();
         $nextday = $now;
         $i = $x_eigyoubi;
-        while ( 1 ) {
-            if ( $i==0 ) {
+        while (1) {
+            if ($i == 0) {
                 break;
             }
             $nextday = $nextday + (24*60*60);
@@ -547,7 +556,7 @@ class Util
             if ($n_youbi=="土" || $n_youbi=="日") {
                 continue;
             }
-            if ( in_array(date("Y-m-d", $nextday), $holiday) ) {
+            if (in_array(date("Y-m-d", $nextday), $holiday)) {
                 continue;
             }
             $i = $i - 1;
@@ -598,7 +607,7 @@ class Util
                 $card[$i] = $card[$i] * 2;
             }
             //2桁の場合は分割して足す
-            if (mb_strlen( $card[$i] ) != 1) {
+            if (mb_strlen($card[$i]) != 1) {
                 $split = str_split($card[$i]);
                 $card[$i] = $split[0] + $split[1];
             }
@@ -614,7 +623,7 @@ class Util
     
     /**
      * メール送信
-     * 
+     *
      * @param array $to_array to=>toname
      * @param array $cc_array cc=>ccname
      * @param array $bcc_array bcc=>bccname
@@ -627,10 +636,18 @@ class Util
      * @param string $attach_type string or binary(default binary)
      * @throws \Exception
      */
-    public static function sendmail($to_array, $cc_array, $bcc_array,
-            $from, $fromname, $subject, $body , $isSMTP = false,
-            $attach_array = null, $attach_type = "binary")
-    {
+    public static function sendmail(
+        $to_array,
+        $cc_array,
+        $bcc_array,
+        $from,
+        $fromname,
+        $subject,
+        $body,
+        $isSMTP = false,
+        $attach_array = null,
+        $attach_type = "binary"
+    ) {
         try {
             mb_language("japanese");
             mb_internal_encoding("UTF-8");
@@ -690,7 +707,7 @@ class Util
     /**
      * カレンダー表示
      * http://shanabrian.com/
-     * 
+     *
      * @param type $year
      * @param type $month
      * @return string
@@ -773,7 +790,7 @@ EOM;
     /**
      * 改行を取り除く
      * 主にメールアドレスに改行+CCのようなデータを受け取ると困るため
-     * 
+     *
      * @param type $str
      * @return type
      */
@@ -786,7 +803,7 @@ EOM;
     
     /**
      * アップロード失敗理由取得
-     * 
+     *
      * @param type $code
      * @return string
      */
@@ -795,7 +812,7 @@ EOM;
         $message = "";
         switch ($code) {
             case UPLOAD_ERR_INI_SIZE:
-                $message = "The uploaded file exceeds the upload_max_filesize directive in php.ini"; 
+                $message = "The uploaded file exceeds the upload_max_filesize directive in php.ini";
                 break;
             case UPLOAD_ERR_FORM_SIZE:
                 $message = "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form";
@@ -856,7 +873,7 @@ EOM;
 
     /**
      * 簡易BASIC認証
-     * 
+     *
      * @param type $id 通すID
      * @param type $pass 通すPASSWORD
      */
@@ -882,7 +899,7 @@ EOM;
     
     /**
      * ファイルダウンロード用のヘッダーを出力
-     * 
+     *
      * これを読んだ後は速やかにファイルコンテンツを出力して、exit()する事
      * @param type $filename クライアントに渡すファイル名
      */
@@ -893,6 +910,4 @@ EOM;
         header("Content-Type: application/octet-stream");
         header("Content-Disposition: attachment; filename=" . $filename);
     }
-
 }
-

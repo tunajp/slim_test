@@ -26,7 +26,7 @@ abstract class Form
     /**
      * コンストラクタ
      * Smartyオブジェクトの作成、http/httpsのリダイレクト
-     * 
+     *
      * @param string protocol "http"/"https"/""ならばリダイレクトしない
      */
     public function __construct($protocol)
@@ -57,7 +57,7 @@ abstract class Form
     /**
      * 指定したプロトコルでなければ指定したプロトコルにリダイレクトします
      * リダイレクトする場合これ以降の処理は中断終了します
-     * 
+     *
      * @global type $HTTP_ROOT_URL
      * @global type $HTTPS_ROOT_URL
      * @param string $protocol "http"/"https"
@@ -83,7 +83,7 @@ abstract class Form
                 header("Location: {$http_url}{$_SERVER['REQUEST_URI']}");
                 exit;
             }
-        } else if ("HTTPS" == strtoupper($protocol)) {
+        } elseif ("HTTPS" == strtoupper($protocol)) {
             if (empty($_SERVER['HTTPS'])) {
                 //header("Location: https://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}");
                 header("Location: {$https_url}{$_SERVER['REQUEST_URI']}");
@@ -94,7 +94,7 @@ abstract class Form
     
     /**
      * BASEタグ用のURLを取得します(例：http://example.com/application/)
-     * 
+     *
      * @global \PhoenixDesign\Lib\type $HTTP_ROOT_URL
      * @global \PhoenixDesign\Lib\type $HTTPS_ROOT_URL
      * @global type $ROOT_URL
@@ -126,7 +126,7 @@ abstract class Form
      * クライアント端末がスマートフォンか(iPadはスマートフォンに含まない)
      * Smartyのテンプレート切り替え用に使用
      * http://st.benefiss.com/document.html
-     * 
+     *
      * @return boolean スマートフォンならばtrue
      */
     protected function isSmartPhone()
@@ -149,13 +149,13 @@ abstract class Form
 
     /**
      * エラー表示をして処理を中断します
-     * 
+     *
      * @global string $SERVER_ENV
      * @param Exeption $e Exceptionインスタンス
      */
     protected function errordisplay($e)
     {
-        $this->template->assign( 'title', "Error" );
+        $this->template->assign('title', "Error");
 
         $log = new \Monolog\Logger('name');
         $log->pushHandler(new \Monolog\Handler\StreamHandler('./app/logs/my.log', \Monolog\Logger::WARNING));
@@ -164,17 +164,23 @@ abstract class Form
 
         global $SERVER_ENV;
         if ($SERVER_ENV == 'PRODUCT') {
-            $this->template->assign( 'body', "システムエラーが発生しました" );
+            $this->template->assign('body', "システムエラーが発生しました");
         } else {
-            $this->template->assign( 'body', "ErrorMessage：<br>" . Util::h($e->getMessage()) . "<br>StackTrace<br>：" . Util::h($e->getTraceAsString()) );
+            $this->template->assign(
+                'body',
+                "ErrorMessage：<br>"
+                . Util::h($e->getMessage())
+                . "<br>StackTrace<br>："
+                . Util::h($e->getTraceAsString())
+            );
         }
-        $tpl = $this->template->display( 'error.tpl' );
+        $tpl = $this->template->display('error.tpl');
         exit();
     }
     
     /**
      * ページネーション
-     * 
+     *
      * @param int $max データの総件数
      * @param int $current_page 現在のページ
      * @param int $limit 1ページあたりの表示件数
@@ -190,7 +196,7 @@ abstract class Form
         for ($i=0; $i<$max_page; $i++) {
             if ($current_page == 1 && $i==0) {
                 $pager .= '<li class="disabled"><a href="#">&laquo;</a></li>' . "\r\n";
-            } else if ($i==0) {
+            } elseif ($i==0) {
                 $pager .= '<li><a href="' . $base_url . ($current_page-1). '">&laquo;</a></li>' . "\r\n";
             }
             if ($i+1 == $current_page) {
@@ -201,7 +207,7 @@ abstract class Form
             }
             if ($current_page == $max_page && ($i+1)==$max_page) {
                 $pager .= '<li class="disabled"><a href="#">&raquo;</a></li>' . "\r\n";
-            } else if (($i+1)==$max_page){
+            } elseif (($i+1)==$max_page) {
                 $pager .= '<li><a href="' . $base_url . ($current_page+1). '">&raquo;</a></li>' . "\r\n";
             }
         }

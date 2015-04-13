@@ -10,7 +10,7 @@ namespace PhoenixDesign\Lib;
 
 /**
  * BaseDatabase
- * 
+ *
  * @author Mitsunori Inaba <m-inaba@phoenixdesign.jp>
  */
 interface BaseDatabase
