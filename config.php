@@ -30,7 +30,6 @@ class Config
     public static $INPUT_ENCODING = 'UTF-8';
 
     public static $slim_config;
-    public static $app_path;
 }
 
 class MailConfig
@@ -47,15 +46,15 @@ class MailConfig
     public static $customer_mail_title = "タイトル";
 }
 
-if ($_SERVER['SERVER_NAME']=='www.hoge.exsample' ){ // 本番環境
+if ($_SERVER['SERVER_NAME'] == 'www.hoge.exsample') { // 本番環境
     error_reporting(0); // 全てのエラー出力をオフにする
 
     Config::$SERVER_ENV = 'PRODUCT';
 
-    Config::$DBHOST	 = 'localhost';
-    Config::$DBUSER	 = 'root';
+    Config::$DBHOST = 'localhost';
+    Config::$DBUSER = 'root';
     Config::$DBPASSWORD = '';
-    Config::$DBNAME	 = 'admmail';
+    Config::$DBNAME = 'admmail';
     Config::$DBENCODING = 'UTF-8';
 
     Config::$slim_config = array(
@@ -67,17 +66,16 @@ if ($_SERVER['SERVER_NAME']=='www.hoge.exsample' ){ // 本番環境
              'message_format' => '%label% - %date% - %message%'
              ))
     );
-    Config::$app_path = "/test_group/slim_test/";
 } else { // 開発環境
     error_reporting(E_ALL); // 全ての PHP エラーを表示する
-    ini_set('scream.enabled', true); // エラー制御演算子 を無効化してすべてのエラーを報告させるようにする
+    ini_set('scream.enabled', true); // エラー制御演算子を無効化してすべてのエラーを報告
     
     Config::$SERVER_ENV = 'DEVELOP';
 
-    Config::$DBHOST	 = 'localhost';
-    Config::$DBUSER	 = 'root';
+    Config::$DBHOST = 'localhost';
+    Config::$DBUSER = 'root';
     Config::$DBPASSWORD = '';
-    Config::$DBNAME	 = 'admmail';
+    Config::$DBNAME = 'admmail';
     Config::$DBENCODING = 'UTF-8';
 
     Config::$slim_config = array(
@@ -89,5 +87,4 @@ if ($_SERVER['SERVER_NAME']=='www.hoge.exsample' ){ // 本番環境
              'message_format' => '%label% - %date% - %message%'
              ))
     );
-    Config::$app_path = "/test_group/slim_test/";
 }
