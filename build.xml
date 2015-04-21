@@ -8,7 +8,7 @@
    <exec executable="lib/vendor/bin/phpcs">
    <arg value="--standard=PSR2" />
    <arg path="${basedir}" />
-   <arg value="--ignore=lib/vendor,tests,templates,tools,config.php"/>
+   <arg value="--ignore=lib/vendor,tests,templates,tools,config.php,node_modules"/>
    </exec>
  </target>
 
