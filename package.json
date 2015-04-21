@@ -1,0 +1,12 @@
+{
+  "name": "e2e_test",
+  "private": true,
+  "version": "0.0.1",
+  "description": "E2E test!",
+  "dependencies": {
+    "traceur": "*",
+    "mocha": "*",
+    "mocha-traceur": "*",
+    "selenium-webdriver": "*"
+  }
+}

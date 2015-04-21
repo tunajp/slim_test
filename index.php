@@ -1,6 +1,7 @@
 <?php
 /*
  * index.php
+ * php -S 0.0.0.0:80
  *
  * @author Mitsunori Inaba <m-inaba@phoenixdesign.jp>
  * Copyright(C) 2015 DesignStudioPhoenix Corporation. All Rights Reserved.
@@ -68,15 +69,17 @@ $app->get('/test/', function () use ($app, $values) {
     $app->render('test.php', array('values' => $values));
 });
 $app->post('/post_test/', function () use ($app, $values) {
+    echo '<html><head><meta charset="utf-8"/></head><body>';
     $values['name'] = $app->request()->post('name');
     $values['age'] = $app->request()->post('age');
     $sex = '';
     if (null == $app->request()->post('sex')) {
         echo '性別が選択されていません';
-    } else ${
-        values['sex'] = $app->request()->post('sex');
+    } else {
+        $values['sex'] = $app->request()->post('sex');
     }
     echo 'test name->' . $values['name'] . ',age->' . $values['age'] . ',性別->' . $values['sex'];
+    echo '</body>';
 });
 
 $app->run();
