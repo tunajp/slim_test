@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="slim_test" default="build">
- <target name="build" depends="phpcs, phpunit, e2etest"/>
+ <target name="build" depends="phpcs, phpunit"/>
 
  <target name="phpcs"
          description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
@@ -15,17 +15,6 @@
  <target name="phpunit" description="Run unit tests with PHPUnit">
     <exec executable="lib/vendor/bin/phpunit" failonerror="true">
     <arg line="--colors tests/test.php"/>
-  </exec>
- </target>
-
- <target name="e2etest"
-         description="E2ETest.">
-   <exec executable="node_modules/.bin/mocha">
-   <arg value="./e2e_test/*" />
-   <arg value="--compilers" />
-   <arg value="js:mocha-traceur" />
-   <arg value="--reporter" />
-   <arg value="xunit" />
   </exec>
  </target>
 
