@@ -3,13 +3,13 @@ My Slim Framework test
 
 フレームワーク疲れ。。。
 
-##環境構築
+## 環境構築
 ```
 npm install
 c:\xampp\php\php tools\composer.phar install --dev
 ```
 
-##開発環境で各種テストを実行しましょう
+## 開発環境で各種テストを実行しましょう
 ```
 node_modules\.bin\jscs js\app\app.js
 c:\xampp\php\php lib\vendor\phpunit\phpunit\phpunit
