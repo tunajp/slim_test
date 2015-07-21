@@ -17,6 +17,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule .* %{REQUEST_URI}/ [R,L]
 </IfModule>
 
+## SakuraInternet BASIC Auth hack
+#RewriteEngine On
+#RewriteCond %{HTTP:Authorization} ^(.*)
+#RewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /test_group/slim_test

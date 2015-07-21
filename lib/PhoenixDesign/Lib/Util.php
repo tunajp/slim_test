@@ -896,6 +896,34 @@ EOM;
             }
         }
     }
+
+    /**
+     * 簡易BASIC認証(さくらインターネット対応版)
+     *
+     * @param type $id 通すID
+     * @param type $pass 通すPASSWORD
+     */
+    public static function simpleBasicAuthSakura($id, $pass)
+    {
+        list($usr,$pswd)=explode(":",base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'],6)));
+        if($usr == ""){
+            header("WWW-Authenticate: Basic realm=\"Sample Script\"");
+            header("HTTP/1.0 401 Unauthorized");
+            echo "Authorization Required";
+            exit;
+        } else {
+            //ユーザー名とパスワードが入っている場合の処理はここに書け！
+            //実際の認証もココでやれ！
+            if ($id === $usr && $pass === $pswd) {
+                //認証成功後の処理
+            } else {
+                //認証エラーの処理
+                //キャンセル時の表示
+                echo "Authorization Required";
+                exit;
+            }
+        }
+    }
     
     /**
      * ファイルダウンロード用のヘッダーを出力
