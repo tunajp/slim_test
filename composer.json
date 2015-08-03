@@ -17,13 +17,13 @@
         }
     },
     "require": {
-        "slim/slim": "dev-master",
+        "slim/slim": "*",
         "slim/logger": "*",
         "phpmailer/phpmailer": "dev-master",
         "smarty/smarty": "3.*"
     },
     "require-dev": {
-        "slim/slim": "dev-master",
+        "slim/slim": "*",
         "slim/logger": "*",
         "phpmailer/phpmailer": "dev-master",
         "smarty/smarty": "3.*",
