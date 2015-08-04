@@ -32,7 +32,7 @@ $app->get('/', function () use ($app, $values) {
     $app->getLog()->fatal('log'); // - level 0
 
 });
-$app->get('/info', function () {
+$app->get('/info/', function () {
     phpinfo();
 });
 $app->notFound(function () {
