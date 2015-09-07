@@ -81,6 +81,12 @@ $app->post('/post_test/', function () use ($app, $values) {
     echo 'test name->' . $values['name'] . ',age->' . $values['age'] . ',性別->' . $values['sex'];
     echo '</body>';
 });
+$app->map('/map/', function () use ($app) {
+    echo 'map';
+    var_dump($app->request->get());
+    var_dump($app->request->post());
+})->via('GET', 'POST');
+
 
 $app->run();
 
