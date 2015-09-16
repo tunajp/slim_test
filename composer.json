@@ -19,14 +19,12 @@
     "require": {
         "slim/slim": "*",
         "slim/logger": "*",
-        "phpmailer/phpmailer": "dev-master",
-        "smarty/smarty": "3.*"
+        "phpmailer/phpmailer": "dev-master"
     },
     "require-dev": {
         "slim/slim": "*",
         "slim/logger": "*",
         "phpmailer/phpmailer": "dev-master",
-        "smarty/smarty": "3.*",
         "phpunit/phpunit": "*",
         "squizlabs/php_codesniffer": "*"
     }

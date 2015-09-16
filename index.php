@@ -67,6 +67,8 @@ $app->get('/test/', function () use ($app, $values) {
     $values['id'] = '101';
     $values['name'] = '名前';
 
+    $text = $app->view()->fetch('test.php', array('values' => $values));
+
     $app->render('test.php', array('values' => $values));
 });
 $app->post('/post_test/', function () use ($app, $values) {
