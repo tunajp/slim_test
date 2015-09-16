@@ -10,6 +10,7 @@
 require "lib/vendor/autoload.php";
 require_once './config.php';
 
+$stopwatch_start = microtime(true);
 $app = new \Slim\Slim(\Config::$slim_config);
 
 $values = array(
@@ -88,6 +89,11 @@ $app->map('/map/', function () use ($app) {
 })->via('GET', 'POST');
 
 
+$app->hook('slim.after', function () use ($app, $stopwatch_start) {
+    $stopwatch_stop = microtime(true) - $stopwatch_start;
+    $app->getLog()->info('URL:' . $_SERVER['REQUEST_URI'] . 'の処理時間:' . $stopwatch_stop . '秒');
+    $app->getLog()->info('URL:' . $_SERVER['REQUEST_URI'] . "の最大メモリ使用量:" . PhoenixDesign\Lib\Util::formatBytes(memory_get_peak_usage()));
+});
 $app->run();
 
 function myFunction($app)
