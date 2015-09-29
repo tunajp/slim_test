@@ -60,6 +60,7 @@ if ($_SERVER['SERVER_NAME'] == 'www.hoge.exsample') { // 本番環境
 
     Config::$slim_config = array(
         'debug' => false,
+        'log.level' => \Slim\Log::WARN,
         'templates.path' => './templates',
         'log.writer' => new \Slim\Logger\DateTimeFileWriter(array(
              'path' => './logs',
@@ -68,6 +69,7 @@ if ($_SERVER['SERVER_NAME'] == 'www.hoge.exsample') { // 本番環境
              ))
     );
     Config::$app_path = "/";
+
 } else { // 開発環境
     error_reporting(E_ALL); // 全ての PHP エラーを表示する
     ini_set('scream.enabled', true); // エラー制御演算子を無効化してすべてのエラーを報告
@@ -82,6 +84,7 @@ if ($_SERVER['SERVER_NAME'] == 'www.hoge.exsample') { // 本番環境
 
     Config::$slim_config = array(
         'debug' => true,
+        'log.level' => \Slim\Log::DEBUG,
         'templates.path' => './templates',
         'log.writer' => new \Slim\Logger\DateTimeFileWriter(array(
              'path' => './logs',
@@ -90,4 +93,5 @@ if ($_SERVER['SERVER_NAME'] == 'www.hoge.exsample') { // 本番環境
              ))
     );
     Config::$app_path = "/";
+
 }
