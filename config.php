@@ -49,6 +49,8 @@ class MailConfig
 
 if ($_SERVER['SERVER_NAME'] == 'www.hoge.exsample') { // 本番環境
     error_reporting(0); // 全てのエラー出力をオフにする
+    //ini_set('display_errors', 1);
+    //error_reporting(E_ALL); // 全ての PHP エラーを表示する
 
     Config::$SERVER_ENV = 'PRODUCT';
 
@@ -71,6 +73,7 @@ if ($_SERVER['SERVER_NAME'] == 'www.hoge.exsample') { // 本番環境
     Config::$app_path = "/";
 
 } else { // 開発環境
+    ini_set('display_errors', 1); 
     error_reporting(E_ALL); // 全ての PHP エラーを表示する
     ini_set('scream.enabled', true); // エラー制御演算子を無効化してすべてのエラーを報告
     
