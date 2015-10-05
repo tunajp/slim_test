@@ -631,7 +631,6 @@ class Util
      * @param string $fromname
      * @param string $subject
      * @param string $body
-     * @param bool $isSMTP
      * @param array $attach_array 添付ファイル名配列
      * @param string $attach_type string or binary(default binary)
      * @throws \Exception
@@ -644,7 +643,6 @@ class Util
         $fromname,
         $subject,
         $body,
-        $isSMTP = false,
         $attach_array = null,
         $attach_type = "binary"
     ) {
@@ -686,7 +684,7 @@ class Util
                 }
             }
             //$mail->AddAttachment($attachfile);
-            if ($isSMTP) {
+            if (\Config::$USE_SMTP) {
                 //$mail->$SMTPDebug = 2;
                 $mail->IsSMTP();
                 $mail->SMTPAuth = true;
