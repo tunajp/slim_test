@@ -26,7 +26,8 @@
         "slim/logger": "*",
         "phpmailer/phpmailer": "dev-master",
         "phpunit/phpunit": "*",
-        "squizlabs/php_codesniffer": "*"
+        "squizlabs/php_codesniffer": "*",
+        "phpmd/phpmd" : "*"
     }
 }
 

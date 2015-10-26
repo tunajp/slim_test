@@ -14,6 +14,7 @@ c:\xampp\php\php tools\composer.phar install --dev
 node_modules\.bin\jscs js\app\app.js
 c:\xampp\php\php lib\vendor\phpunit\phpunit\phpunit
 c:\xampp\php\php lib\vendor\squizlabs\php_codesniffer\scripts\phpcs --standard=psr2 -v index.php
+c:\xampp\php\php lib\vendor\phpmd\phpmd\src\bin\phpmd ./index.php text unusedcode
 
 c:\xampp\php\php -S 0.0.0.0:80
 node_modules\.bin\mocha .\e2e_test\* --compilers js:mocha-traceur
